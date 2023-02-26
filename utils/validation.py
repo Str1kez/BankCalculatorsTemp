@@ -1,4 +1,4 @@
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 
 from utils.exception import IncorrectInput
 
@@ -6,7 +6,7 @@ from utils.exception import IncorrectInput
 def validate_input(rate: str, duration: str, credit: str) -> tuple[Decimal, int, Decimal]:
     try:
         parsed_rate = Decimal(rate)
-    except ValueError:
+    except InvalidOperation:
         raise IncorrectInput("Неверный тип данных для ставки")
     try:
         parsed_duration = int(duration)
@@ -14,7 +14,7 @@ def validate_input(rate: str, duration: str, credit: str) -> tuple[Decimal, int,
         raise IncorrectInput("Неверный тип данных для количества месяцев")
     try:
         parsed_credit = Decimal(credit)
-    except ValueError:
+    except InvalidOperation:
         raise IncorrectInput("Неверный тип данных для суммы кредита")
 
     if parsed_rate <= 0 or parsed_duration <= 0 or parsed_credit <= 0:

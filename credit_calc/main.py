@@ -2,6 +2,7 @@ import tkinter.ttk as ttk
 from tkinter import *
 from tkinter import messagebox as mb
 
+from credit_calc.calculators import annuity_calc, diff_calc
 from utils import IncorrectInput, validate_input
 
 
@@ -11,6 +12,12 @@ def calculate():
     except IncorrectInput as e:
         mb.showerror(title="Ошибка ввода", message=str(e))
         return
+    for row in table.get_children():
+        table.delete(row)
+    if type_var.get():
+        diff_calc(table, rate, duration, credit)
+    else:
+        annuity_calc(table, rate, duration, credit)
 
 
 win = Tk()
