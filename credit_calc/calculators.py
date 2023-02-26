@@ -39,9 +39,11 @@ def diff_calc(table: Treeview, rate: Decimal, duration: int, credit: Decimal):
         table.insert("", "end", text="", values=row)
 
     summary_values = (
-        f"Общая сумма платежа: {decimal_format(summary_payment)}",
+        "",
         f"Сумма переплаты: {decimal_format(summary_payment - credit)}",
+        f"Общая сумма платежа: {decimal_format(summary_payment)}",
     )
+    table.insert("", "end", text="", values=("", "", ""))
     table.insert("", "end", text="", values=summary_values)
 
 
@@ -52,4 +54,5 @@ def annuity_calc(table: Treeview, rate: Decimal, duration: int, credit: Decimal)
         f"Общая сумма платежа: {decimal_format(summary_payment)}",
         f"Сумма переплаты: {decimal_format(summary_payment - credit)}",
     )
+    table.insert("", "end", text="", values=("", "", ""))
     table.insert("", "end", text="", values=values)
